@@ -1,3 +1,351 @@
+osTicket v1.10-rc.3
+===================
+### Enhancements
+  * Compatibility with PHP7 (#2828)
+  * Share tickets among organization members (#2405)
+  * Add lock semantics compatible with v1.9 (lock on view) (f826189)
+  * Staff login backdrop is customizable (#2468)
+  * Add advanced search for closed date, thread last message, thread last
+    response (#2444)
+  * Disable auto-claim by department (#2591)
+  * Properly flag SYSTEM thread postings (#2702)
+  * Add option to use dept/agent name on replies (#2700)
+  * Add a preference option to set the sort order of the thread entries in DESC
+    or ASC order (#2700)
+  * Thread dates can be shown as relative or absolute timestamps (#2700)
+  * Make Avatars optional on thread view (#2701)
+  * Make Authentication Tokens Optional (auto-login links in emails) (#2714)
+  * Use icons for ticket and task actions (#2760)
+  * role: Add option to use primary role on assignment (#2832)
+
+### Improvements
+  * All improvements cited in v1.9.12 and v1.9.13
+  * Fix deleting of custom logos (#2433)
+  * Fix assignment setting on new tasks (#2452)
+  * Fix subject display of non-short-answer fields on ticket view and ticket
+    queue (#2463)
+  * Fix advanced search of ticket source (#2479)
+  * Forbid adding deleted forms via "Manage Forms" (#2483)
+  * Use horizontal tabs for translatable article content rather than the left
+    tabs in a table (#2484)
+  * Fix lock expiration time if PHP and database have different time zones
+    (#2533)
+  * Fix user class and ID matching from email headers (#2549)
+  * Fix emission of `Content-Language` header in client portal for multiple
+    system languages, thanks @t-oster (#2555)
+  * Fix deployment of fresh git repo or download on PHP 5.6 (#2571)
+  * Fix handling of abbreviated database timezones like `CDT` (#2570)
+  * Fix incorrect height display of avatars (#2580, #2609)
+  * Sort help topic names case insensitively, thanks @jdelhome3578 (#2530)
+  * Fix detection of looped emails (f2cac64)
+  * Fix crash in ticket preview (popout) if ticket has no thread (bd9e9c5)
+  * Fix javascript crash adding new ticket filter (d2af0eb)
+  * Fix crash if the `name` field of a user is a drop-down (ec0b2c5)
+  * Fix incorrect SQL query removing departments (cf6cd81)
+  * Properly fallback to database file storage if system is misconfigured (1580136)
+  * Fix crash handling fields with `__` in the name in the VisibilityConstraint
+    class (b3d09b6)
+  * Remove staff-dept records when removing an agent (ecf6931)
+  * Avoid crashing processing ORM records with NULL select_related models (#2589)
+  * Fix several full-text search related issues (#2588, #2603)
+  * Fix crash sending registration link for a guest user (#2552)
+  * Avoid showing lock icon for expired locks on ticket listing (#2617)
+  * Fix incorrect redirect from SSO authentication, thanks @kevinoconnor7
+    (#2641)
+  * Fix vertical overflow of uploaded image preview (#2616)
+  * Fix unnecessary dropping of CDATA table on MySQL 5.6 (#2638)
+  * Fix several issues on user directory ticket listing (#2626)
+  * Fix encoding of attachment filenames in emails (#2586)
+  * Fix warning rendering advanced search dialog, thanks @t-oster (#2594)
+  * Fix bounce message loop for message alert to a bad agent email address
+    (#2639)
+  * Make fulltext search optional on user lookup (#2657)
+  * Add the [claim] feature again (#2681)
+  * Fix agent's Signature & Timezone dropped on update (#2720)
+  * Fix crash in user CSV import (#2708)
+  * Fix crash in user ajax lookup (#2600)
+  * Send Reference and In-Reply-To headers only for thread items pertinent to
+    the receiving user (#2723)
+  * Properly clean HTML custom fields (#2736)
+  * Fix changing/saving properties on internal ticket statuses, with the
+    exception of the state (#2767)
+  * Fix CSV list import (#2738)
+  * Fix late redirect header for single ticket typeahead result (#2830)
+  * Add sortable column headers in the ticket and task queues (#2761)
+  * Fix several issues with the file CLI app (#2808)
+  * Fix config crash on install (#2827, #2844)
+  * Set due date based on user's timezone (#2812, #2981)
+  * Fix crash rendering some email addresses to string (#2844)
+  * Fix crash rendering thread with invalid timestamps (#2844)
+  * Log assignment note (comments), if any, when staff created ticket is
+    assigned (#2944)
+  * Change transient SLA, on transfer,  if target department has a valid SLA
+    (#2944)
+  * Fix typo on task transfer modal dialog (#2944)
+  * Fix ticket source on ticket edit (#2944)
+  * Convert user time to database time when querying stats (#2944)
+  * Fix date picker clearing input on invalid date format (#2944)
+  * Show topic-specific thank-you page (#2915)
+  * Department manager can be excluded from the new ticket alert (#2974)
+  * Do not scrub iframe `@src` attribute (#2940)
+
+### Performance and Security
+  * Use full-text search for quick-search typeahead boxes (#2479)
+  * Speed up a few slow and noisy queries (5c68eb3, 340fee7, 208fcc3)
+  * Lower memory requirements processing attachments (#2491, #2492)
+  * Ensure agent still has access when reopening a ticket (#2768)
+  * Always perform validation server-side for ajax uploads (#2844)
+  * Protect access to files shown in the FileUpload field (#2618)
+  * Decode entities prior to HTML scrubbing (#2940)
+
+### Known Issues
+  * Uploading multiple files simultaneous (via drag and drop) will cause some
+    files to be dropped
+
+osTicket v1.10-rc.2
+===================
+### Enhancements
+  * Lazy locking system for ticket locking (#2325, #2351, 37cdf25, de92ec5,
+    37a0676)
+  * Add settings for avatars and local "Oscar's A-Team" avatars (#2334)
+  * Several UI tweaks (7436195, #2426)
+  * Add transfer and assign mass actions to tickets (#2375)
+  * Import agents from the command line (#2323)
+  * User select dialog can be opened after closing in new ticket by staff
+    (605c313)
+  * Deadband new message alert and autoresponse to once per five minutes per
+    user per thread (598dedc)
+  * [Add Rule] button to add many new rules at one to a ticket filter (c03279d)
+
+### Improvements
+  * Fix several install and upgrade-related issues (fc10dcb, e1ca975, b709139,
+    abc8619, #2411, 832ea94, abb9a08, e3bb6c2, 8e373d4)
+  * Fix database timezone detection on Windows (#2297)
+  * Fix several tasks related issues (#2311, #2344, #2376, #2400, #2421, c3d48a9)
+  * Fix hiding of department-specific canned responses (#2315)
+  * Fix add and edit of ticket status list items (#2314)
+  * Fix incorrect definition of some ORM tables (#2324, 69839af)
+  * Fix crash rendering a closed ticket (#2328)
+  * Fix case-insensitive sorting of help topics (#2357)
+  * Fix several advanced search related issues (#2317, 3d4313f, ce3ceae,
+    b5e6d4e, 5a935ca)
+  * Fix incorrect SQL deleting a department (#2359)
+  * Fix incorrect array usage of department members for alerts (#2356)
+  * Add missing perm for view all agents' stats (#2358)
+  * Fix missing thread inline images from redactor image manager (be77da4)
+  * Fix updating configuration for file upload fields (2f4f9c1)
+  * Fix crash creating tickets with canned attachments (a156bba)
+  * Fix missing inline images in mailouts (84c9b54)
+  * Prefer submitted text over last-saved draft (46ab79b)
+  * Fix incorrect FAQ link in front-page sidebar (ea9dd5f)
+  * Fix missing assignee selection on new ticket by staff (7865eee)
+  * Fix issue details showing up on ticket edit (a183a98, 7fbd0f6)
+  * Fix inability to change SLA on some tickets (#2392)
+  * Fix auto-claim on new ticket by staff if a filter added a canned reply (c2ce2e9)
+  * Fix Dept::getMembersForAlerts() missing primary members (abc93efd)
+  * Fix inability to create tickets if missing the ASSIGN permission on all
+    depts (0c49e62)
+  * Fix inability as staff to reset a user's password (0006dd8)
+  * Render fields marked !visible and !editable, but required on the client
+    portal (7f55a0b)
+  * Fix sorting of help topics (a7cc49f, 08a32a4)
+  * Fix new message alert to a random staff member (d3685a9)
+  * Fix saving abbreviations on new list items (538087b)
+  * Fix parsing of some multi-part MIME messages (c57c22a)
+  * Fix numerous crashes
+
+### Performance and Security
+  * Improve performance loading the ticket view (6bba226, 4b12d54)
+  * Improve performance loading queue statistics (0a89510, 6b76402)
+  * Dramatically improve full-text search performance (167287d)
+
+osTicket 1.10
+==================
+## Major New Features
+
+### Internationalization, Phase III
+![screen shot 2014-10-18 at 11 40 38 pm](https://cloud.githubusercontent.com/assets/672074/4692086/b16b1474-574a-11e4-89e7-b871ff591802.png)
+
+Phase III of the internationalization project is the next major advancement of
+osTicket language support. The greatest improvement is that all
+administratively customizable content. While this is a great last mile for many
+multilingual support teams, we've also revisited the client interface main
+pages as well as the knowledge base on both the client and staff panels.
+
+  * Elect primary and secondary languages
+    * Any language can be the primary, any number of languages can be secondary
+    * English-US can be disabled
+    * Order of secondary languages is sortable and controls flag order
+  * All content is translatable to secondary languages
+      * Help Topics
+        * Alphabetic sorting happens after translation
+      * SLA Plans
+      * Departments
+      * Custom Forms (and all configurations such as placeholders)
+      * Custom Lists
+        * Items
+        * Properties and configurations
+      * Site Pages
+      * FAQ Categories
+      * FAQ Articles
+        * Common attachments (available for all translations)
+        * Per-language attachments
+      * Content such as welcome emails and password-reset emails
+  * Olson timezones are used instead of GMT offset
+    * Auto-detect support for agent and client timezone
+  * Time and date formats can be automatic by locale preference now.
+    * Locale preference is the default
+    * Locale preference with forced 24-hour time is also an option
+    * Advanced format is also possible using the intl library and `sprintf` as a backup
+    * Formats including the day of the week are localized
+    * Chinese and Arabic formats using alternate day, month, and year digits and separators are now automatic.
+  * Client portal has HTML headers indicate search engine links to pages of other
+    languages, as well as the Content-Header HTTP header to indicate the intended
+    audience
+  * Spell check in text boxes, textareas and rich text editors should respect the
+    language of the content being edited
+
+### Tasks
+![screen shot 2015-05-06 at 12 36 14 pm](https://cloud.githubusercontent.com/assets/672074/7616658/c5147c68-f96b-11e4-85b7-e74a3482bb4f.png)
+
+Tasks are sub-tickets which can be created and attached to tickets as well as
+created separately. Tasks have their own assignees, department routing and
+visibility, due date, and custom data. Tasks have their own threads and can
+have a list of collaborators. All in all, tasks may very well be the greatest
+advancement of osTicket since the advent of the ticket itself.
+
+### New Advanced Search
+![screen shot 2015-05-13 at 12 35 15 pm](https://cloud.githubusercontent.com/assets/672074/7616759/94616a1c-f96c-11e4-8c19-ae1ca26a85c0.png)
+
+The advanced search feature is rewritten to address several  shortcomings of
+the original feature as well as a host of new features including
+  * Search by any field, built-in or custom
+  * Save your searches
+  * Advanced search is shown as a new queue
+  * Current advanced search criteria is maintained between searches
+  * Sorting options are relevant to queue and preference remains after navigation between queues
+
+## Minor New Features
+
+### Thread editing
+![screen shot 2015-03-20 at 6 56 10 pm](https://cloud.githubusercontent.com/assets/672074/6762680/ce4e78a0-cf32-11e4-9316-c0a969e9c70a.png)
+
+Thread items can now be edited. The original entries are preserved and are
+accessible via a thread item's "History". Items can be resent with or without
+editing them, and a signature selection is available when resending.
+
+### Roles, and custom extended access
+![screen shot 2015-05-03 at 9 05 12 pm](https://cloud.githubusercontent.com/assets/672074/7448163/257ce586-f1d8-11e4-8ed8-a11324d13027.png)
+
+The group permissions component has been offloaded to a new component, named
+"Roles". Roles allow for naming a set of permissions. Agents now have a
+"Primary Role" which defines their access to global things like the user
+directory and their access for their primary department. Each department
+granted via "Groups" is allows to be linked to a distinct "Role". This allows
+granting Read-Only access to some departments, for instance.
+
+### Improved knowledge base interface
+![screen shot 2014-10-18 at 11 55 58 pm](https://cloud.githubusercontent.com/assets/672074/4692123/5ec01038-574c-11e4-80a7-7e8a8efe3963.png)
+  * "Featured" articles show on the front page
+  * Knowledge base search on front page
+  * Translatable content
+  * Locale-specific attachments
+
+### Multiple forms and disable individual fields for Help Topics
+Help Topic configuration has a new super feature. Multiple forms can now be
+associated with each help topic, and the order the forms should appear for new
+tickets and editing tickets is configurable. Previously, the custom forms were
+always rendered above the "Ticket Details" form; but now it's completely
+customizable. What's more is that individual fields **including the issue
+details** can be disabled for any help topic.
+
+### Department hierarchy
+Departments are now nestable. All departments can have a parent department, and
+the hierarchy is arbitrarily nestable. Access is cascaded so that access to a
+parent department automatically extends access to all descendent departments.
+
+### Image annotation
+![screen shot 2015-05-04 at 9 07 38 pm](https://cloud.githubusercontent.com/assets/672074/7466027/ac34575c-f2a1-11e4-9335-417960f89334.png)
+
+Images can be annotated to add simple shapes like ovals, boxes, arrows and
+text. Annotates can be committed, and a new image is created from the
+annotations; however, annotations can still be edited before the thread post is
+submitted. Annotations are supported for both clients and agents, and the
+images can be selected from the ticket thread, so images already posted can be
+easily marked up.
+
+### Variable context type-ahead
+![screen shot 2015-04-20 at 4 32 58 pm](https://cloud.githubusercontent.com/assets/672074/7240963/ee930d8c-e77a-11e4-8928-26240274db13.png)
+
+When editing content which uses variables, such as a thank-you page or an email
+template, variable placeholders now use a type-ahead feature. This new pop out
+significantly improves the connection between which variables are available in
+which templates. It also allows for adding significantly to the variable
+library without relying on exhaustive documentation to convey this information.
+Some new variables include
+  * User lists, such as department members, team members, and collaborator lists
+  * Lists can be rendered as names, emails, or both
+  * Dates are format-able to time, short, full, and long
+  * Dates can be humanized to something like *in about an hour*
+  * Dates can be auto localized and formatted to the recipients locale and time
+    zone selection
+  * Attachments to thread items and custom fields can be attached via variable
+    (e.g. `%{message.files}`)
+
+### Redesigned list management
+![Simplified, tabular, paginated view of list items, with mass actions](https://cloud.githubusercontent.com/assets/672074/5881786/3040d162-a309-11e4-9529-8ae51d358f81.png)
+
+The list management feature has a significant overhaul to accommodate larger
+lists. It also provides a heads display of list item properties as well as AJAX
+updates. CSV import and pagination have also been added as well as mass enable,
+disable, and delete.
+
+### Pluggable filter actions
+![screen shot 2015-05-04 at 8 59 32 pm](https://cloud.githubusercontent.com/assets/672074/7465977/801b4cbc-f2a0-11e4-9598-95dd52e79e82.png)
+
+Filter actions are now far more flexible allowing for more elaborate and
+creative filter actions to be created. A new filter action has been added as an
+example of future possibilities: send an email. The new feature allows for
+ticket filter actions to be defined without modification to internal table
+structures, and even allows actions to be created via plugins!
+
+Actions are also sortable and performed in the order specified, which allows
+doing something like sending an email before rejecting the ticket.
+
+### Other Improvements
+#### Custom Data
+* Fields have more granular access configuration. View, edit, and requirement
+  can be enabled individually for both agents and end users
+* Fields can be marked for required for closed. Therefore they can inhibit
+  closure of a ticket without a valid value.
+
+#### Export
+The agent's locale is considered when exporting CSV and semicolon separators
+are used where necessary
+
+#### User Interface
+The subject line and many other text fields around the system are truncated by
+the browser, which fixes early truncation for some language with long Unicode
+byte stream, such as Chinese.
+
+#### Improved lock system
+The ticket lock system uses a code now which is rotated when updates to tickets
+are submitted. This helps prevent unwanted extra posts to tickets. A new
+annoying popup is displayed when viewing the ticket and the lock is about to
+expire.
+
+#### Draft system
+The draft system has been rewritten to reduce the number of requests to the
+backend and to reduce the dreaded "Unable to save draft" popup
+
+#### ORM
+The database query system is being redesigned to use an object relational
+mapper (ORM) instead of SQL queries. This will eventually lead to fewer
+database queries to use the system, cleaner code, and will allow the use of
+database engines other than MySQL. The ORM was originally introduced in
+osTicket v1.8.0, but has seen the greatest boost in capability in this release.
+About 47% of the SQL queries are removed between v1.9.7 and v1.10
+
 osTicket v1.9.12
 ================
 ### Improvements
